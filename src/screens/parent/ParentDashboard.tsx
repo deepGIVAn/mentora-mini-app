@@ -50,12 +50,20 @@ export const ParentDashboard = ({ navigation }: any) => {
         <Text style={styles.studentName}>{item.name}</Text>
         <Text style={styles.studentDetails}>Age: {calculateAge(item.dob)}</Text>
       </View>
-      <Button 
-        title="View Lessons" 
-        variant="outline" 
-        onPress={() => navigation.navigate('LessonList', { studentId: item.id })}
-        style={styles.viewButton}
-      />
+      <View style={styles.actionButtons}>
+        <TouchableOpacity 
+          style={styles.profileButton}
+          onPress={() => navigation.navigate('StudentProfile', { studentId: item.id })}
+        >
+          <Text style={styles.profileButtonText}>Profile</Text>
+        </TouchableOpacity>
+        <Button 
+          title="Lessons" 
+          variant="outline" 
+          onPress={() => navigation.navigate('LessonList', { studentId: item.id })}
+          style={styles.viewButton}
+        />
+      </View>
     </Card>
   );
 
@@ -210,9 +218,23 @@ const styles = StyleSheet.create({
     color: Theme.colors.textSecondary,
     marginTop: 2,
   },
+  actionButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    marginRight: 8,
+  },
+  profileButtonText: {
+    color: Theme.colors.primary,
+    fontSize: 14,
+    fontWeight: '600' as any,
+  },
   viewButton: {
     paddingVertical: 6,
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     minHeight: 32,
   },
   loader: {

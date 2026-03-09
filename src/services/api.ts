@@ -56,5 +56,33 @@ export const ApiService = {
     // In-memory update for mock
     MOCK_USERS[newStudent.id] = newStudent;
     return newStudent;
+  },
+
+  updateStudent: async (id: string, updateData: Partial<Student>): Promise<Student> => {
+    await delay(1000);
+    if (!MOCK_USERS[id]) {
+      throw new Error('Student not found');
+    }
+
+    const updatedStudent = {
+      ...MOCK_USERS[id],
+      ...updateData,
+    } as Student;
+
+    // If name changed, update avatar URL (properly encoded via utility)
+    if (updateData.name) {
+      updatedStudent.avatar = getAvatarUrl(updateData.name, 'random');
+    }
+
+    MOCK_USERS[id] = updatedStudent;
+    return updatedStudent;
+  },
+
+  getStudentById: async (id: string): Promise<Student> => {
+    await delay(500);
+    if (!MOCK_USERS[id]) {
+      throw new Error('Student not found');
+    }
+    return MOCK_USERS[id] as Student;
   }
 };
