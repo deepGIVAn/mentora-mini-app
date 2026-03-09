@@ -5,7 +5,7 @@ import { Student } from '../../types';
 import { Theme } from '../../theme';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
-import { LogOut, Users } from 'lucide-react-native';
+import { LogOut, Users, User as UserIcon } from 'lucide-react-native';
 import { calculateAge } from '../../utils/dateUtils';
 import { useEffect, useState } from 'react';
 
@@ -30,7 +30,10 @@ export const MentorDashboard = ({ navigation }: any) => {
 
   const renderStudentCard = ({ item }: { item: Student }) => (
     <Card style={styles.studentCard}>
-      <View style={styles.avatarContainer}>
+      <View style={styles.avatarWrapper}>
+        <View style={styles.iconBackground}>
+          <UserIcon size={24} color={Theme.colors.border} />
+        </View>
         {item.avatar ? (
           <Image source={{ uri: item.avatar }} style={styles.avatar} />
         ) : (
@@ -161,8 +164,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: Theme.spacing.md,
   },
-  avatarContainer: {
+  avatarWrapper: {
+    position: 'relative',
+    width: 48,
+    height: 48,
     marginRight: Theme.spacing.md,
+  },
+  iconBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: Theme.colors.background,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: -1,
   },
   avatar: {
     width: 48,

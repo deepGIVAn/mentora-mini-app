@@ -3,7 +3,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Theme } from '../../theme';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
-import { LogOut, BookOpen, GraduationCap, Award } from 'lucide-react-native';
+import { LogOut, BookOpen, GraduationCap, Award, User as UserIcon } from 'lucide-react-native';
 
 export const StudentDashboard = ({ navigation }: any) => {
   const { user, logout } = useAuth();
@@ -12,7 +12,18 @@ export const StudentDashboard = ({ navigation }: any) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerContent}>
-          {user?.avatar && <Image source={{ uri: user.avatar }} style={styles.headerAvatar} />}
+          <View style={styles.avatarWrapper}>
+            <View style={styles.iconBackground}>
+              <UserIcon size={20} color={Theme.colors.border} />
+            </View>
+            {user?.avatar ? (
+              <Image source={{ uri: user.avatar }} style={styles.headerAvatar} />
+            ) : (
+              <View style={[styles.headerAvatar, styles.avatarPlaceholder]}>
+                <Text style={styles.avatarInitials}>{user?.name?.charAt(0)}</Text>
+              </View>
+            )}
+          </View>
           <View>
             <Text style={styles.welcomeText}>Welcome, {user?.name}!</Text>
             <Text style={styles.roleText}>Student Account</Text>
@@ -88,7 +99,24 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
+  },
+  avatarWrapper: {
+    position: 'relative',
+    width: 40,
+    height: 40,
     marginRight: Theme.spacing.sm,
+  },
+  iconBackground: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: Theme.colors.background,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: -1,
   },
   welcomeText: {
     fontSize: 20,
@@ -101,6 +129,16 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     padding: Theme.spacing.sm,
+  },
+  avatarPlaceholder: {
+    backgroundColor: Theme.colors.background,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  avatarInitials: {
+    fontSize: 16,
+    fontWeight: '700' as any,
+    color: Theme.colors.primary,
   },
   scrollContent: {
     padding: Theme.spacing.lg,

@@ -47,3 +47,6 @@ src/
 -   **Data Consistency**: Creating a student in the Parent dashboard updates the local mock state for the duration of the session.
 -   **DOB Formatting**: Strict `YYYY-MM-DD` validation is enforced on the client side to ensure data integrity.
 -   **Dynamic Age Calculation**: Student ages are calculated in real-time based on the provided DOB, improving UX by showing relevant instead of raw data.
+-   **Profile Avatars**: Integrated dynamic profile images using `ui-avatars.com`. Names are properly URL-encoded to handle spaces and special characters.
+-   **Layered Visuals**: All avatars feature a layered UI with a background icon and an initials-based fallback, ensuring a consistent premium look even during image loading or failures.
+-   **UI Consistency**: Unified design language across Parent, Student, and Mentor dashboards with reusable card and button components.

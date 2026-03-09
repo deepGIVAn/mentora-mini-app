@@ -15,8 +15,8 @@ import { Button } from '../../components/common/Button';
 import { Card } from '../../components/common/Card';
 
 export const LoginScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('parent@mentora.com');
+  const [password, setPassword] = useState('123456');
   const { login, isLoading } = useAuth();
 
   const handleLogin = async () => {

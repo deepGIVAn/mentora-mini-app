@@ -1,5 +1,6 @@
 import { MOCK_USERS, MOCK_LESSONS, MOCK_SESSIONS } from '../data/mockData';
 import { User, Student, Lesson, Session } from '../types';
+import { getAvatarUrl } from '../utils/avatarUtils';
 
 // Mocking API delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -50,7 +51,7 @@ export const ApiService = {
       role: 'student',
       dob: studentData.dob || '',
       parentId: studentData.parentId,
-      avatar: `https://ui-avatars.com/api/?name=${studentData.name}&background=random`,
+      avatar: getAvatarUrl(studentData.name || 'Student', 'random'),
     };
     // In-memory update for mock
     MOCK_USERS[newStudent.id] = newStudent;
